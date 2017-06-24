@@ -1,49 +1,55 @@
-\documentclass[conference]{IEEEtran}
-% Some Computer Society conferences also require the compsoc mode option,
-% but others use the standard conference format.
-%
-% If IEEEtran.cls has not been installed into the LaTeX system files,
-% manually specify the path to it like:
-% \documentclass[conference]{../sty/IEEEtran}
-
-
-
-%cmap has to be loaded before any font package (such as cfr-lm)
-\usepackage{cmap}
-\usepackage[T1]{fontenc}
-
-
-\usepackage{graphicx,url}
-\usepackage[table,xcdraw]{xcolor}
-
-\usepackage{times}
-\usepackage{latexsym}
- \usepackage[printonlyused]{acronym}
+\documentclass{article}
  
-\usepackage{blindtext}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{kpfonts}
+\usepackage{bookman}
+ 
+% acentuação
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{xspace}
+%\usepackage{chicago}
 \usepackage{url}
-\usepackage{listings}
-\usepackage{multirow}
-\usepackage{booktabs} 
-\usepackage{pgfplots}
+\usepackage{setspace}
 \usepackage{graphicx}
-\usepackage{cancel}
-\usetikzlibrary{patterns}
-\pgfplotsset{width=10cm,compat=1.9}
 
+\usepackage{fancybox}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[bbgreekl]{mathbbol}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{paralist}
 
 \usepackage{color}
+\usepackage{subfigure}
+\definecolor{red}{rgb}{0.9,0.1,0.1}
+\definecolor{blue}{rgb}{0,0.1,0.8}
 
-\usepackage{url}
+%%% cria links no arquivo .pdf
+%%% comentar as linhas na versão para impressao
+\usepackage[pdftex, plainpages=false, hyperfootnotes=false]{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
 
-\usepackage{amsmath}
-\usepackage{amssymb}
+%%% bibliografia
+%\usepackage{natbib}
+\usepackage[sf,outermarks,clearempty]{titlesec}
 
+\usepackage[pdftex]{geometry}
+  \geometry{a4paper,left=3cm,right=2cm,top=3cm,bottom=3cm,twoside}
 
-\acrodef{pots}[POTS]{Poverty of the Stimulus}
+\usepackage{acronym}
+
+ 
+\usepackage{eqparbox,array}
+ 
+\usepackage{comment}
+\usepackage{fontenc}
+\usepackage{inputenc}
+\usepackage{listing}
+\usepackage{listings}
+\usepackage{framed}
+
 
 \acrodef{CBIR}{Content-based image retrieval}
 \acrodef{MAM}{Metric Access Method}
@@ -70,440 +76,53 @@
 \acrodef{CNN} {Convolutional Neural Network}
 \acrodef{CNNs} {Convolutional Neural Networks}
 
-\usepackage{pgfplotstable,booktabs}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% You don't need this part
-% I did it to create your file 
-\usepackage{filecontents} % <-- To create files on the fly
-
-
-% Needed packages
-\usepackage{tikz}
-\usepackage{pgfplots}
-\pgfplotsset{compat=newest}
-
-% Command to read a number from file (the hspace is quite hacky...)
-\newcommand{\showodsf}[2]{%
-\mbox{\input{data/#1_#2_ods_f.txt}\hspace{-2.5pt}}%
-}
-
-\newcommand{ \Correction }[ 1 ] {\textcolor{black}{#1}}
-\newcommand{ \NewMaterial }[ 1 ] {\textcolor{black}{#1}}
-\newcommand{ \ConnectDots }[ 1 ] {\textcolor{black}{#1}}
-
-
-%Even though `american`, `english` and `USenglish` are synonyms for babel package (according to https://tex.stackexchange.com/questions/12775/babel-english-american-usenglish), the llncs document class is prepared to avoid the overriding of certain names (such as "Abstract." -> "Abstract" or "Fig." -> "Figure") when using `english`, but not when using the other 2.
-%english has to go last to set it as default language
-\usepackage[ngerman,english]{babel}
-%Hint by http://tex.stackexchange.com/a/321066/9075 -> enable "= as dashes
-\addto\extrasenglish{\languageshorthands{ngerman}\useshorthands{"}}
-
-%better font, similar to the default springer font
-%cfr-lm is preferred over lmodern. Reasoning at http://tex.stackexchange.com/a/247543/9075
-\usepackage[%
-rm={oldstyle=false,proportional=true},%
-sf={oldstyle=false,proportional=true},%
-tt={oldstyle=false,proportional=true,variable=true},%
-qt=false%
-]{cfr-lm}
- 
-%for easy quotations: \enquote{text}
-\usepackage{csquotes}
-
-%enable margin kerning
-\usepackage{microtype}
-
-%tweak \url{...}
-\usepackage{url}
-%\urlstyle{same}
-%improve wrapping of URLs - hint by http://tex.stackexchange.com/a/10419/9075
-\makeatletter
-\g@addto@macro{\UrlBreaks}{\UrlOrds}
-\makeatother
-%nicer // - solution by http://tex.stackexchange.com/a/98470/9075
-%DO NOT ACTIVATE -> prevents line breaks
-%\makeatletter
-%\def\Url@twoslashes{\mathchar`\/\@ifnextchar/{\kern-.2em}{}}
-%\g@addto@macro\UrlSpecials{\do\/{\Url@twoslashes}}
-%\makeatother
-
-%diagonal lines in a table - http://tex.stackexchange.com/questions/17745/diagonal-lines-in-table-cell
-%slashbox is not available in texlive (due to licensing) and also gives bad results. This, we use diagbox
-%\usepackage{diagbox}
-
-%required for pdfcomment later
-\usepackage{xcolor}
-
-
-%enable nice comments
-%this also loads hyperref
-\usepackage{pdfcomment}
-%enable hyperref without colors and without bookmarks
-\hypersetup{hidelinks,
-   colorlinks=true,
-   allcolors=black,
-   pdfstartview=Fit,
-   breaklinks=true}
-%enables correct jumping to figures when referencing
-\usepackage[all]{hypcap}
-
-\newcommand{\commentontext}[2]{\colorbox{yellow!60}{#1}\pdfcomment[color={0.234 0.867 0.211},hoffset=-6pt,voffset=10pt,opacity=0.5]{#2}}
-\newcommand{\commentatside}[1]{\pdfcomment[color={0.045 0.278 0.643},icon=Note]{#1}}
-
-%compatibality with packages todo, easy-todo, todonotes
-\newcommand{\todo}[1]{\commentatside{#1}}
-%compatiblity with package fixmetodonotes
-\newcommand{\TODO}[1]{\commentatside{#1}}
-
-%enable \cref{...} and \Cref{...} instead of \ref: Type of reference included in the link
-\usepackage[capitalise,nameinlink]{cleveref}
-%Nice formats for \cref
-\crefname{section}{Sect.}{Sect.}
-\Crefname{section}{Section}{Sections}
-
-\usepackage{xspace}
-%\newcommand{\eg}{e.\,g.\xspace}
-%\newcommand{\ie}{i.\,e.\xspace}
-\newcommand{\eg}{e.\,g.,\ }
-\newcommand{\ie}{i.\,e.,\ }
-% Some very useful LaTeX packages include:
-% (uncomment the ones you want to load)
-
-
-% *** MISC UTILITY PACKAGES ***
-%
-%\usepackage{ifpdf}
-% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
-% compilation based on whether the output is pdf or dvi.
-% usage:
-% \ifpdf
-%   % pdf code
-% \else
-%   % dvi code
-% \fi
-% The latest version of ifpdf.sty can be obtained from:
-% http://www.ctan.org/pkg/ifpdf
-% Also, note that IEEEtran.cls V1.7 and later provides a builtin
-% \ifCLASSINFOpdf conditional that works the same way.
-% When switching from latex to pdflatex and vice-versa, the compiler may
-% have to be run twice to clear warning/error messages.
-
-
-
-
-
-
-% *** CITATION PACKAGES ***
-%
-%\usepackage{cite}
-% cite.sty was written by Donald Arseneau
-% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
-% \cite{} output to follow that of the IEEE. Loading the cite package will
-% result in citation numbers being automatically sorted and properly
-% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
-% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
-% \cite will automatically add leading space, if needed. Use cite.sty's
-% noadjust option (cite.sty V3.8 and later) if you want to turn this off
-% such as if a citation ever needs to be enclosed in parenthesis.
-% cite.sty is already installed on most LaTeX systems. Be sure and use
-% version 5.0 (2009-03-20) and later if using hyperref.sty.
-% The latest version can be obtained at:
-% http://www.ctan.org/pkg/cite
-% The documentation is contained in the cite.sty file itself.
-
-
-
-
-
-
-% *** GRAPHICS RELATED PACKAGES ***
-%
-\ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
-\else
-  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
-  % will default to the driver specified in the system graphics.cfg if no
-  % driver is specified.
-  % \usepackage[dvips]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../eps/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.eps}
-\fi
-% graphicx was written by David Carlisle and Sebastian Rahtz. It is
-% required if you want graphics, photos, etc. graphicx.sty is already
-% installed on most LaTeX systems. The latest version and documentation
-% can be obtained at: 
-% http://www.ctan.org/pkg/graphicx
-% Another good source of documentation is "Using Imported Graphics in
-% LaTeX2e" by Keith Reckdahl which can be found at:
-% http://www.ctan.org/pkg/epslatex
-%
-% latex, and pdflatex in dvi mode, support graphics in encapsulated
-% postscript (.eps) format. pdflatex in pdf mode supports graphics
-% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
-% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
-% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
-% which can result in "jaggedy"/blurry rendering of lines and letters as
-% well as large increases in file sizes.
-%
-% You can find documentation about the pdfTeX application at:
-% http://www.tug.org/applications/pdftex
-
-
-
-
-
-% *** MATH PACKAGES ***
-%
-%\usepackage{amsmath}
-% A popular package from the American Mathematical Society that provides
-% many useful and powerful commands for dealing with mathematics.
-%
-% Note that the amsmath package sets \interdisplaylinepenalty to 10000
-% thus preventing page breaks from occurring within multiline equations. Use:
-%\interdisplaylinepenalty=2500
-% after loading amsmath to restore such page breaks as IEEEtran.cls normally
-% does. amsmath.sty is already installed on most LaTeX systems. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/pkg/amsmath
-
-
-
-
-
-% *** SPECIALIZED LIST PACKAGES ***
-%
-%\usepackage{algorithmic}
-% algorithmic.sty was written by Peter Williams and Rogerio Brito.
-% This package provides an algorithmic environment fo describing algorithms.
-% You can use the algorithmic environment in-text or within a figure
-% environment to provide for a floating algorithm. Do NOT use the algorithm
-% floating environment provided by algorithm.sty (by the same authors) or
-% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
-% algorithm float types and packages that provide these will not provide
-% correct IEEE style captions. The latest version and documentation of
-% algorithmic.sty can be obtained at:
-% http://www.ctan.org/pkg/algorithms
-% Also of interest may be the (relatively newer and more customizable)
-% algorithmicx.sty package by Szasz Janos:
-% http://www.ctan.org/pkg/algorithmicx
-
-
-
-
-% *** ALIGNMENT PACKAGES ***
-%
-%\usepackage{array}
-% Frank Mittelbach's and David Carlisle's array.sty patches and improves
-% the standard LaTeX2e array and tabular environments to provide better
-% appearance and additional user controls. As the default LaTeX2e table
-% generation code is lacking to the point of almost being broken with
-% respect to the quality of the end results, all users are strongly
-% advised to use an enhanced (at the very least that provided by array.sty)
-% set of table tools. array.sty is already installed on most systems. The
-% latest version and documentation can be obtained at:
-% http://www.ctan.org/pkg/array
-
-
-% IEEEtran contains the IEEEeqnarray family of commands that can be used to
-% generate multiline equations as well as matrices, tables, etc., of high
-% quality.
-
-
-
-
-% *** SUBFIGURE PACKAGES ***
-%\ifCLASSOPTIONcompsoc
-%  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
-%\else
-%  \usepackage[caption=false,font=footnotesize]{subfig}
-%\fi
-% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
-% for subfigure.sty, the latter of which is no longer maintained and is
-% incompatible with some LaTeX packages including fixltx2e. However,
-% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
-% which will override IEEEtran.cls' handling of captions and this will result
-% in non-IEEE style figure/table captions. To prevent this problem, be sure
-% and invoke subfig.sty's "caption=false" package option (available since
-% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
-% handling of captions.
-% Note that the Computer Society format requires a larger sans serif font
-% than the serif footnote size font used in traditional IEEE formatting
-% and thus the need to invoke different subfig.sty package options depending
-% on whether compsoc mode has been enabled.
-%
-% The latest version and documentation of subfig.sty can be obtained at:
-% http://www.ctan.org/pkg/subfig
-
-
-
-
-% *** FLOAT PACKAGES ***
-%
-%\usepackage{fixltx2e}
-% fixltx2e, the successor to the earlier fix2col.sty, was written by
-% Frank Mittelbach and David Carlisle. This package corrects a few problems
-% in the LaTeX2e kernel, the most notable of which is that in current
-% LaTeX2e releases, the ordering of single and double column floats is not
-% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
-% single column figure to be placed prior to an earlier double column
-% figure.
-% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
-% corrections already built into the system in which case a warning will
-% be issued if an attempt is made to load fixltx2e.sty as it is no longer
-% needed.
-% The latest version and documentation can be found at:
-% http://www.ctan.org/pkg/fixltx2e
-
-
-%\usepackage{stfloats}
-% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
-% the ability to do double column floats at the bottom of the page as well
-% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
-% LaTeX2e). It also provides a command:
-%\fnbelowfloat
-% to enable the placement of footnotes below bottom floats (the standard
-% LaTeX2e kernel puts them above bottom floats). This is an invasive package
-% which rewrites many portions of the LaTeX2e float routines. It may not work
-% with other packages that modify the LaTeX2e float routines. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/pkg/stfloats
-% Do not use the stfloats baselinefloat ability as the IEEE does not allow
-% \baselineskip to stretch. Authors submitting work to the IEEE should note
-% that the IEEE rarely uses double column equations and that authors should try
-% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
-% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
-% such ways.
-% Do not attempt to use stfloats with fixltx2e as they are incompatible.
-% Instead, use Morten Hogholm'a dblfloatfix which combines the features
-% of both fixltx2e and stfloats:
-%
-% \usepackage{dblfloatfix}
-% The latest version can be found at:
-% http://www.ctan.org/pkg/dblfloatfix
-
-
-
-
-% *** PDF, URL AND HYPERLINK PACKAGES ***
-%
-%\usepackage{url}
-% url.sty was written by Donald Arseneau. It provides better support for
-% handling and breaking URLs. url.sty is already installed on most LaTeX
-% systems. The latest version and documentation can be obtained at:
-% http://www.ctan.org/pkg/url
-% Basically, \url{my_url_here}.
-
-
-
-
-% *** Do not adjust lengths that control margins, column widths, etc. ***
-% *** Do not use packages that alter fonts (such as pslatex).         ***
-% There should be no need to do such things with IEEEtran.cls V1.6 and later.
-% (Unless specifically asked to do so by the journal or conference you plan
-% to submit to, of course. )
-
-
-% correct bad hyphenation here
-\hyphenation{op-tical net-works semi-conduc-tor}
-
-
+%\newcommand{ \Correction }[ 1 ] {\textcolor{black}{#1}}
+%\newcommand{ \NewMaterial }[ 1 ] {\textcolor{black}{#1}}
+%\newcommand{ \ConnectDots }[ 1 ] {\textcolor{black}{#1}}
+%\newcommand{ \NewMaterialGPU }[ 1 ] {\textcolor{black}{#1}}
+%\newcommand{ \Error }[ 1 ] {\textcolor{black}{#1}}
+
+
+\acrodef{CBIR} {Content-based Image Retrieval}
+\acrodef{MAM}  {Métodos de Acceso Métrico}
+\acrodef{SAM}  {Métodos de Acceso Espacial}
+\acrodef{MAE}  {Métodos de Acesso Espaciais}
+
+\acrodef{DTW}  {Dynamic Time Warping}
+\acrodef{LSH}  {Locality Sensitive Hashing}
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+\usepackage{courier}
+\definecolor{darkgreen}{rgb}{0,0.6,0.1}
+\definecolor{gray}{rgb}{0.75,0.75,0.75}
+
+
+\title{A Small \LaTeX{} Article Template\thanks{To your mother}}
+\author{Your Name  \\
+	Your Company / University  \\
+	\and 
+	The Other Dude \\
+	His Company / University \\
+	}
+
+\date{\today}
+% Hint: \title{what ever}, \author{who care} and \date{when ever} could stand 
+% before or after the \begin{document} command 
+% BUT the \maketitle command MUST come AFTER the \begin{document} command! 
 \begin{document}
-%
-% paper title
-% Titles are generally capitalized except for words such as a, an, and, as,
-% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
-% not capitalized unless they are the first or last word of the title.
-% Linebreaks \\ can be used within to get better formatting as desired.
-% Do not put math or special symbols in the title.
-\title{Approximate nearest neighbors by  deep learning hashing on large-scale search}
 
-% author names and affiliations
-% use a multiple column layout for up to three different
-% affiliations
-\author{\IEEEauthorblockN{Michael Shell}
-\IEEEauthorblockA{School of Electrical and\\Computer Engineering\\
-Georgia Institute of Technology\\
-Atlanta, Georgia 30332--0250\\
-Email: http://www.michaelshell.org/contact.html}
-\and
-\IEEEauthorblockN{James Kirk\\ and Montgomery Scott}
-\IEEEauthorblockA{Starfleet Academy\\
-San Francisco, California 96678--2391\\
-Telephone: (800) 555--1212\\
-Fax: (888) 555--1212}}
-
-% conference papers do not typically use \thanks and this command
-% is locked out in conference mode. If really needed, such as for
-% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
-% after \documentclass
-
-% for over three affiliations, or if they all won't fit within the width
-% of the page, use this alternative format:
-% 
-%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
-%Homer Simpson\IEEEauthorrefmark{2},
-%James Kirk\IEEEauthorrefmark{3}, 
-%Montgomery Scott\IEEEauthorrefmark{3} and
-%Eldon Tyrell\IEEEauthorrefmark{4}}
-%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
-%Georgia Institute of Technology,
-%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
-%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
-%Email: homer@thesimpsons.com}
-%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
-%Telephone: (800) 555--1212, Fax: (888) 555--1212}
-%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
-
-
-
-
-% use for special paper notices
-%\IEEEspecialpapernotice{(Invited Paper)}
-
-
-
-
-% make the title area
 \maketitle
 
-% As a general rule, do not put math, special symbols or citations
-% in the abstract
+
 \begin{abstract}
-
-An optimal data representation  is  an important  task in information retrieval.   A fast indexing method increases the performance level and a good representation offers precise discrimination.  
-
-%In this work we perform exhaustive experiments  
-    
-
-In this Similarity search algorithms based on hashing were proposed to query high-dimensional datasets due to its fast retrieval speed and low storage cost.   Recent studies, promote the use of  \ac{CNN} with hashing techniques to improve the search accuracy.  However, there are challenges to solve in order to find a practical and efficient solution to index CNN features, such as the need for heavy training process to achieve accurate query results and the critical dependency on data-parameters.   Aiming to overcome these issues, we propose a new method for scalable similarity search, i.e., Deep frActal based  Hashing (DAsH), by computing the best data-parameters values for optimal sub-space projection  exploring the correlations among CNN features attributes using fractal theory. Moreover, inspired by recent advances in CNNs, we use not only activations of lower layers which are more general-purpose but also previous knowledge of the semantic data on the latest CNN layer to improve the search accuracy.  Thus, our method produces a better representation of the data space with a less computational cost for a better accuracy.  This significant gain in speed and accuracy allows us to evaluate the framework on a  large, realistic, and challenging set of datasets.  
-
+Short introduction to subject of the paper \ldots 
 \end{abstract}
-
-% no keywords
-
-
-
-
-% For peer review papers, you can put extra information on the cover
-% page as needed:
-% \ifCLASSOPTIONpeerreview
-% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
-% \fi
-%
-% For peerreview papers, this IEEEtran command inserts a page break and
-% creates the second title. It will be ignored for other modes.
-\IEEEpeerreviewmaketitle
-
-
-
+ 
+ 
+ 
+ 
 
 \section{Introduction}\label{sec:intro}
 
@@ -544,7 +163,7 @@ On the other hand, in Machine Learning traditionally images are often described 
 %\item[-]  These supervised  hashing methods \cite{Xia:2014:SHI:2892753.2892851,kLin:DH}  use    non-linear activations, e.g. tang or sigmoid,  to approximate the quantization step. These methods are likely to slow down the training process \cite{ImageNet}.
 
 \item[-]  There is a trade-off between classification error and quantization error: activations of lower layers are more general-purpose \cite{DBLP:journals/corr/YosinskiCBL14}, so training is more effective. However lower layers have larger  activations maps (many nodes), which are harder to encode which leads to a compromise. 
-	
+    
 %\item[-] In many real applications, it is not easy to decide the appropriate domain parameters at the beginning because the data and query distribution may change during the execution.An approximate similarity search scheme based on hashing cannot handle this dynamic workload because the parameters are tuned for a static dataset.
 
 \item[-]  There is a dependency on parameter values  for approximate similarity search schemes based on LSH, which determine the number of hash functions and number of hash tables.  
@@ -662,8 +281,8 @@ LSH based methods report efficient results when adequate values for $m$ (number 
  
 A fractal is characterized by the self-similarity property, i.e., it is an object that presents roughly the same characteristics when analyzed over a broad range of scales \cite{DBLP:journals/jidm/TrainaTWF10}. From the Fractal Theory, the Correlation Fractal Dimension $\mathfrak{D}$ is particularly useful for data analysis, since it can be applied to estimate the intrinsic dimension of real datasets that exhibit fractal behavior, i.e., exactly or statistically self-similar datasets \cite{DBLP:fractal2016}.   It has been shown that, given a set of $N$ objects in a dataset with a distance function $d(x,y)$, the average number of $k$ neighbors within a given distance $r$ is proportional to $r$ raised to $\mathfrak{D}$. Thus, the pair-count $PC(r)$ of pairs of elements within distance $r$ follows the power law:
 \begin{equation}\label{eq:fractal}
-	   PC(r) = K_p \times r^{\mathfrak{D}}		
-	\end{equation}
+       PC(r) = K_p \times r^{\mathfrak{D}}      
+    \end{equation}
 
      where, $K_p$ is a proportionality constant, and $\mathfrak{D}$ is the correlation fractal dimension of the dataset. 
     Consequently, a fractal is defined by the self-similarity property, that is the main characteristic that represents exactly or statistically  the similarity between the parts to the whole fractal.  
@@ -679,7 +298,7 @@ Figure \ref{fig:dash} illustrates the training process structure. The network co
 \includegraphics[width=1.7\columnwidth]{dash/DAsh_learning_final.pdf}
 \caption{ DAsH: Training and indexing process. } 
 \label{fig:dash}
-\end{figure*} 		
+\end{figure*}       
 
 As it was showed in \cite{citeulike:fractal:encoders} that a successful dimensionality reduction  algorithm projects the data into a feature space with dimensionality close to the fractal dimensionality (FD) of the data in the original space and preserves topological properties.  Thus, to find the target dimensionality ($m$) needed by  autoencoder networks we follow the following  heuristic.  We start with the value at $m_1 = 2^2$, compute the FD of the new space with just that, then increment  value at $m_2 = 2^3$, recompute the FD, and continue doing this until some $ t\ (m_t =  2 ^ t)$ where we can see a flattening in the fractal dimension, meaning that more features do not change the fractal dimensionality of the dataset. 
 
@@ -704,7 +323,7 @@ The second step of our procedure is image retrieval via  DAsH. We process the qu
 
 
 \subsection{Using Fractals to estimate LSH parameters}
-	 	 
+         
 %The idea to use Correlation Fractal Dimension to compute the LSH parameters take advantage of fractal theory that ensures that a  distance distribution between the elements of the original dataset and a optimal sub-space projection is maintained.  
 %In this work we propose a new approach to index CNN features using \ac{LSH} without the data-parameters dependency  problem, exploring the correlations among CNN features by computing the fractal dimension to find the optimal parameter values for LSH.  Then, this values is used to tune LSH scheme during the indexing process  aiming to achieve better accuracy in results with less computational cost during indexing process. 
  
@@ -712,14 +331,14 @@ To tune the LSH parameters we used  a property of the   correlation fractal dime
 
 We are interested to find out  the resolution scale $log(r)$ at which there are approximately $k$ objects.  Considering the line with slope $\mathfrak{D}$ passing at  a point defined as $  <log (r), log (Pairs(k))>$  the   constant $K_d$ using the Equation \ref{eq:fractal} is:
 \begin{eqnarray}\label{eq:fractalk}
-	   log(PC(r)) = \mathfrak{D} \times log (r) + K_p \nonumber\\
-	   K_p   = log (Pairs (k)) - \mathfrak{D} \times log (r)
+       log(PC(r)) = \mathfrak{D} \times log (r) + K_p \nonumber\\
+       K_p   = log (Pairs (k)) - \mathfrak{D} \times log (r)
 \end{eqnarray} 
 Considering  another point   $  <log (R), log (Pairs(N))>$, the   constant $K_d$  is defined as :
 \begin{equation}\label{eq:fractalN}
     K_d    = log (Pairs(N)) - \mathfrak{D} \cdot log (R) 
 \end{equation} 
-Now, combining Equations \ref{eq:fractalk}, \ref{eq:fractalN}, we can define  the radius  $r$ as:    	
+Now, combining Equations \ref{eq:fractalk}, \ref{eq:fractalN}, we can define  the radius  $r$ as:       
 \begin{equation}\label{eq:fractalR}
   r  =  R \cdot  exp (  \frac{log (Pairs (k)) - log (Pairs(N))}{ \mathfrak{D} } )    
 \end{equation}
@@ -767,7 +386,7 @@ The supervised MLP architecture, or also called autoencoder, implements a mappin
 \includegraphics[width=1.\columnwidth]{images_fractal/frac_2.JPG}
 \caption{ The self-supervised MLP architecture } 
 \label{fig:fig_2}
-\end{figure} 	
+\end{figure}    
 
 A botleneck MLP with a unique hidden layer physically performs a linear PCA even with non-linear hidden units. In fact, in order to effectively implement a non-linear dimensionality reduction, the mapping function $ F $ and $ G $ must be both non-linear. The process of dimensionality reduction consists to find the functions $ F $ and $ G $ which are approximately functions inverse to each other. Since the inverse of a nonlinear function can not be linear, therefore, if any of the functions is linear, the other must also be linear.
 
@@ -884,9 +503,9 @@ Supervised hashing with classification baseline
 \subsection{EXTENSION TO SEMI-SUPERVISED HASHING}
 \begin{equation}
 \begin{split}
-	\mathbb{P}(x\;correct for\; q) & = \sum_{j=label} \mathbb{P}(j\mid x)\mathbb{P}(j\mid q)  \\
-	&=(\mathbb{P}(j\mid x),\mathbb{P}(j\mid q))  \\
-	&=\underbrace{(\hat{\mathbb{P}}(j\mid x)}_{classifier},\hat{\mathbb{P}}(j\mid q))  \\
+    \mathbb{P}(x\;correct for\; q) & = \sum_{j=label} \mathbb{P}(j\mid x)\mathbb{P}(j\mid q)  \\
+    &=(\mathbb{P}(j\mid x),\mathbb{P}(j\mid q))  \\
+    &=\underbrace{(\hat{\mathbb{P}}(j\mid x)}_{classifier},\hat{\mathbb{P}}(j\mid q))  \\
 \end{split}
 \end{equation}
 \begin{itemize}
@@ -1139,12 +758,10 @@ We conducted performance studies on many real and synthetic datasets.  The empir
 %display columns/0/.style={string type,column name={}}
 %]{csv/methods.csv}
     
+    
 
-\bibliographystyle{IEEEtran}
-\bibliography{sbc-template}
- 
+\bibliographystyle{plain}
+\bibliography{references}
 
-% that's all folks
 \end{document}
-
 
