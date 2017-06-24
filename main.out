@@ -1,0 +1,23 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Locality Sensitive Hashing}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Fractal Theory}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Using Fractals to estimate LSH parameters}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Fractal Dimension and Dimensionality Reduction}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Principal component analysis}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Factor Analysis}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{Self Supervised Multi Layer Perceptrons}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{SUPERVISED HASHING: A SIMPLE BASELINE}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Evaluation protocols of SSH and SH}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.2}{Retrieval through class probability estimation}{section.4}% 11
+\BOOKMARK [1][-]{section.5}{How should we evaluate supervised hashing?}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{HASHING FOR NEAREST NEIGHBOR SEARCH}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.2}{SUPERVISED HASHING}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.3}{WHY NOT JUST ENCODE THE CLASS ID?}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.4}{EXTENSION TO SEMI-SUPERVISED HASHING}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.5}{HOW CAN WE AVOID THIS BIASED PROTOCOL?}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.6}{UNSUPERVISED BASELINE FOR PROPOSED PROTOCOL}{section.5}% 18
+\BOOKMARK [1][-]{section.6}{EVALUATION PROTOCOLS}{}% 19
+\BOOKMARK [1][-]{section.7}{Experiments}{}% 20
+\BOOKMARK [2][-]{subsection.7.1}{Experiment 1: Tunning LSH Parameters}{section.7}% 21
+\BOOKMARK [2][-]{subsection.7.2}{Retrieval Performance}{section.7}% 22
+\BOOKMARK [1][-]{section.8}{Conclusions}{}% 23

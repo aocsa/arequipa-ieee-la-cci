@@ -1,0 +1,75 @@
+\begin{thebibliography}{10}
+
+\bibitem{hashing_algoritghms_survey}
+Alexandr Andoni and Piotr Indyk.
+\newblock {Near-optimal hashing algorithms for approximate nearest neighbor in
+  high dimensions}.
+\newblock {\em Communications of the ACM}, 51(1):117--122, 2008.
+
+\bibitem{lshforest}
+Mayank Bawa, Tyson Condie, and Prasanna Ganesan.
+\newblock {L}{S}{H} forest: self-tuning indexes for similarity search.
+\newblock In {\em Proceedings of the 14th international conference on World
+  Wide Web}, pages 651--660, Chiba, Japan, 2005.
+
+\bibitem{aleman_high_dimensional}
+Christian B\"{o}hm, Stefan Berchtold, and Daniel~A. Keim.
+\newblock {Searching in high-dimensional spaces: Index structures for improving
+  the performance of multimedia databases}.
+\newblock {\em ACM Computing Surveys}, 33(3):322--373, 2001.
+
+\bibitem{DBLP:fractal2016}
+Christian~Cesar Bones, Luciana A.~S. Romani, and Elaine P.~M. de~Sousa.
+\newblock Clustering multivariate data streams by correlating attributes using
+  fractal dimension.
+\newblock {\em {JIDM}}, 7(3):249--264, 2016.
+
+\bibitem{jegou2012anti}
+Herv{\'e} J{\'e}gou, Teddy Furon, and Jean-Jacques Fuchs.
+\newblock Anti-sparse coding for approximate nearest neighbor search.
+\newblock In {\em Acoustics, Speech and Signal Processing (ICASSP), 2012 IEEE
+  International Conference on}, pages 2029--2032. IEEE, 2012.
+
+\bibitem{ImageNet}
+Alex Krizhevsky, Ilya Sutskever, and Geoffrey~E. Hinton.
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock In {\em Proceedings of the 25th International Conference on Neural
+  Information Processing Systems}, NIPS'12, pages 1097--1105, USA, 2012. Curran
+  Associates Inc.
+
+\bibitem{Li:2015:RSS:2881665.2882186}
+Zechao Li, Jing Liu, Jinhui Tang, and Hanqing Lu.
+\newblock Robust structured subspace learning for data representation.
+\newblock {\em IEEE Trans. Pattern Anal. Mach. Intell.}, 37(10):2085--2098,
+  October 2015.
+
+\bibitem{multiprobe}
+Qin Lv, William Josephson, Zhe Wang, Moses Charikar, and Kai Li.
+\newblock {Multi-probe LSH: efficient indexing for high-dimensional similarity
+  search}.
+\newblock In {\em Proceedings of the International Conference on Very Large
+  Data Bases}, pages 950--961, Vienna, Austria, 2007.
+
+\bibitem{sablayrolles2016should}
+Alexandre Sablayrolles, Matthijs Douze, Herv{\'e} J{\'e}gou, and Nicolas
+  Usunier.
+\newblock How should we evaluate supervised hashing?
+\newblock {\em arXiv preprint arXiv:1609.06753}, 2016.
+
+\bibitem{LSHBook}
+Gregory Shakhnarovich, Trevor Darrell, and Piotr Indyk.
+\newblock {\em {Nearest-Neighbor Methods in Learning and Vision: Theory and
+  Practice}}, chapter {Locality-Sensitive Hashing Using Stable Distributions},
+  pages 55--67.
+\newblock The MIT Press, 2006.
+
+\bibitem{conf/cvpr/ShenSLS15}
+Fumin Shen, Chunhua Shen, Wei Liu, and Heng~Tao Shen.
+\newblock In {\em CVPR}.
+
+\bibitem{DBLP:journals/corr/YosinskiCBL14}
+Jason Yosinski, Jeff Clune, Yoshua Bengio, and Hod Lipson.
+\newblock How transferable are features in deep neural networks?
+\newblock {\em CoRR}, abs/1411.1792, 2014.
+
+\end{thebibliography}
