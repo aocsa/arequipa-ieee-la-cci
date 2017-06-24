@@ -292,15 +292,15 @@ In practice, $\mathbb{P}(.\mid q)$ is unfamiliar, but we can train a classifier 
 Network (CNN) with a softmax output layer. Labels of $ \mathcal{I}_{train}$
 are stored on [$log2 (C)$] e bits or in an inverted file
 
-\\\\
+\\
 %\textbf{Relationship between classification accuracy and ranking performance.} If we denote the classification accuracy as $p$, then the resulting mAP is at least $p$. When the classifier predicts the class of $q$ correctly, all images of that class will be ranked first and the resulting AP($q$) is $1$; this happens on a proportion $p$ of the queries. So, the classification accuracy is a lower bound on the mAP.
 
 \textbf{Relationship between classification accuracy and ranking performance.} If we show the classification accuracy as $p$, then the resulting $mAP$ is at least $p$. When the classifier foretells the class of $q$ properly, all images of that class will be ranked first, and the resulting AP($q$) is $1$; this happens on a proportion $p$ of the queries. So, the classification accuracy is a lower bound on the mAP.
-\\\\
+\\
 %\textbf{Optimal ranking for SSH.} In the more general setup of SSH, we do not know the label of some images in $\mathcal{I}_{train}$. Yet, considering the (true) conditional label probabilities $\mathbb{P}(c\mid q)$ and $\mathbb{P}(c\mid x)$, the probability that $x$ is correct for $q$ is given by $\sum_{c=1}^C \mathbb{P}(c\mid q) \mathbb{P}(c\mid x) $ it is the probability that both q and x have the same label, assuming conditional independence of the labels of the query and the image. Notice that this is the dot product between the conditional label probability vectors of $q$ and $x$.Then, given probability estimates $\hat{\mathbb{P}}$  for the labels of queries and images, which are obtained on $\mathcal{I}_{label}$, we consider two retrieval algorithms:
 \textbf{Optimal ranking for SSH.} In the more general setup of SSH, we do not know the label of some images in $\mathcal{I}_{train}$. Yet, considering the (real) probabilities $\mathbb{P}(c\mid q)$ and $\mathbb{P}(c\mid x)$, the probability that $x$ is correct for $q$ is given by $\sum_{c=1}^C \mathbb{P}(c\mid q) \mathbb{P}(c\mid x) $ it is the probability that both q and $x$ have the same label, assuming conditional self-sufficiency of the labels of the query and the image. Notice that this is the dot product between the dependent label probability vectors of $q$ and x$. Then, given probability measures $\hat{\mathbb{P}}$  for the labels of queries and images, which are taken on $\mathcal{I}_{label}$, we consider two retrieval algorithms:
 
-\\\\
+\\
 \begin{itemize}
 %\item \textbf{Classifier topline: }: For each image $x$of $\mathcal{I}_{train}$, store a vector $u(x)$ equal to either (1) the one-hot encoding vector of the label of $x$ if $x \in \mathcal{I}_{label}$, or (2) the full conditional probability vector  $\hat{\mathbb{P}}(.\mid x)$). Rank images $x$ according to the dot product $\langle\hat{\mathbb{P}}(.\mid q), u(x)\rangle$  This strategy corresponds to the optimal strategy, but requires storing the probability vectors for images in $\mathcal{I}_{train} \backslash \mathcal{I}_{label}$
 
