@@ -10,6 +10,7 @@
 \usepackage{url}
 \usepackage{setspace}
 \usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
 
 \usepackage{fancybox}
 \usepackage{amsmath}
@@ -210,15 +211,47 @@ The paper is organized as follows. Section 2 summarizes the background for this 
 \section{Preliminaries}
 
 \subsection{Representation}  % jose luis
-There are several methods to represent time series, which support searches for similarity and data mining tasks. These methods can be represented in two categories: Adaptive Data Representations and Non-Adaptive Data Representations \cite{wang13}.
+     	
+Existen varios métodos para representar series temporales, las cuales dan soporte a las búsquedas por similitud y tareas de minería de datos. Estos métodos pueden ser representados en dos categorías: representaciones de Data Adaptativa y representaciones de Data No Adaptativa \cite{wang13}.  
 
-In the representation of Adaptive Data we have the following methods: Singular Value Decomposition(SVD) that transforms the time series $ A_i $ into another time series $ B_i $ of length $ n $ whose elements are in decreasing order \cite{Bettaiah14}. Principal Component Analysis (PCA) involving mathematical procedures that transform a number of (possible) correlational variables into a (less) number of uncorrelated variables called principal components \cite{wekwek}, in PCA the data is summarized as a linear combination Of sets of orthonormal vectors, PCA acts similarly to Autoencoders (AE) that applies backpropagation by setting the target values to be equal to the entries $ y (i) = x (i) $ \cite{wekwek}. Symbolic Aggregate Approximation (SAX) allows a time series of arbitrary lengt $ n $ is reduced to a string of arbitrary length $ w $, ($ w <n $, usually $ w \ll n $) \cite{Lin07}. Indexable Piecewise Linear Approximation (IPLA) indexes the reduced data to speed up the retrieval efficiency of the similarity search \cite{Chen07}.
+En la representación de Data Adaptativa tenemos los siguientes metodos: Decomposición de Valor Singular (SVD)  que transforma la serie temporal $A_i$ en otra serie temporal $B_i$ de longitud $n$ cuyos elementos están en  orden decreciente \cite{Bettaiah14}, Análisis de Componentes Principales (PCA) que mplica procedimientos matemáticos que transforman un número de (posibles) variables correlacionales en un número (menor) de variables no correlacionadas llamadas componentes principales \cite{wekwek}, en PCA la data es resumida como una combinacion lineal de conjuntos de vectores ortonormales, PCA trbaja de forma similar a  Autoencoders (AE) , SAX permite que una serie temporal de longitud arbitraria n se reduzca a una cadena de longitud arbitraria $ w $, ($ w <n $, normalmente $ w \ll n $) \cite{Lin07} e indexacion de aproximación lineal por partes (IPLA)  que indexa los datos reducidos para acelerar la eficiencia de recuperación de la búsqueda de similitud \cite{Chen07}.
 
-The most common methods used in non-adaptive data representation are: Discrete Cosine Transformation (DCT), is a real orthonormal transformation. DCT is similar to the discrete Fourier transform (DFT)\cite{Faloutsos94}, with the difference that it uses cosine functions instead of sines and cosines to transform from the time domain to the frequency domain \cite{Bettaiah14}. Discrete Wavelet Transformation (DWT ) Processes data at different scales or resolutions in contrast to DFT \cite{Faloutsos94} where only the frequency components are considered \cite{Bettaiah14} and Piecewise Aggregate Approximation (PAA) which is computed by dividing it into an appropriate number of segments. Each segment is represented by its mean, which is a real number. A discretization process assigns these real numbers to discrete symbols of an alphabet $ A $ of size $ a $ \cite{Bettaiah14} .
+Los metodos mas comunes usados en representacion de data no adaptativa son:  Transformación Discreta de Coseno (DCT) es una transformación ortonormal real. DCT es similar a la transformada de Fourier discreta (DFT), con la diferencia de que utiliza funciones coseno en lugar de senos y cosenos para transformar del dominio del tiempo al dominio de la frecuencia \cite{Bettaiah14}, Transformación de Wavelet Discreta (DWT) procesa datos a diferentes escalas o resoluciones en contraste con DFT \cite{Faloutsos94} donde sólo se consideran los componentes de frecuencia.\cite{Bettaiah14} y Piecewise Aggregate Approximation (PAA).
 
-\subsection{ Fractal Dimension and Dimensionality Reduction} % jose luis
 
-The approaches used to reduce dimensionality depend on some parametric and non-parametric methods. Other methods reduce the original feature space by heuristic deletion of some of the attributes.
+
+\subsubsection{Principal component analysis(PCA)}
+Principal Component Analysis (PCA) involves mathematical procedures that transforms a number of possible correlational variables into a small number of uncorrelated variables called \textit{principal components}. The first component represents as much variability in the data as possible, and each successive component represents as much of the remaining variability as possible. \\
+
+In PCA, the data is summarized as a linear combination of a set of orthonormal vectors. Let $\{ x_i \}_{i=1}^n$  a sample of $ \mathbb{R}^d $  with mean $\bar{x}$  and covariance $ \sum $, with spectral decomposition $ \sum = U \Lambda U^T $.
+
+The main transformation component $y= U^T(x-\bar{x})$  produces a reference system in which the sample has a mean $ 0 $ and a covariance matrix $\Lambda$ containing the eigenvalues of $\sum$. Now, we can discard the variables with small variance to project them on a subspace covered by the first main component, and get a good approximation of the original sample. The key property of PCA is to achieve the best linear mapping $x \in \mathbb{R}^d \rightarrow x^* \in \mathbb{R}^m$ of the sum of least squares errors in the reconstruction of data.
+
+\subsubsection{Factor Analysis}
+Factor analysis is a statistical method for modeling the covariance structure of high dimensional data using a small number of latent variables \cite{Ghahramani}. The data are assumed to be a linear combination of uncorrelated Gaussian sources (factors). After the linear combination, each component of the data vector is also assumed to be corrupted with additional Gaussian noise. (see Figure \ref{fig:fig_1} )
+\begin{figure}[htp]\centering
+\includegraphics[width=0.6\columnwidth]{images_fractal/frac_1.JPG}
+\caption{ Simple route diagram for a factor analysis model }
+\label{fig:fig_1}
+\end{figure}
+
+The objective of the factor analysis is to find $\Lambda$ and $\Psi$ which improves the model of the $ x $ structure. The factorial variables $ z $ of the correlation model between the elements of $ x $, while the variable $ u $ counts for an independent noise in each element of $ x $. The $ m$ factors play the same role of principal components in the PCA. We first subtract the information from the data and then show the date as:
+\begin{equation}
+    x - \mu = \Lambda z + u
+\end{equation}
+
+\subsubsection{Self Supervised Multi Layer Perceptrons(AUTOENCODER)}
+The supervised MLP architecture, or also called autoencoder, implements a mapping using two layers of linear perceptrons with $ d $ input, $ m $ hidden units and $ d $ training outputs to replicate the input to the output layer minimizing the error Of the sum of squares with \textit{backpropagation}. This approach is called \textit{self-supervised}, referring to the fact that during training each vector output sample is identical to the vector input sample.
+\begin{figure}[htp]\centering
+\includegraphics[width=0.6\columnwidth]{images_fractal/frac_2.JPG}
+\caption{ The self-supervised MLP architecture }
+\label{fig:fig_2}
+\end{figure}
+
+A botleneck MLP with a unique hidden layer physically performs a linear PCA even with non-linear hidden units. In fact, in order to effectively implement a non-linear dimensionality reduction, the mapping function $ F $ and $ G $ must be both non-linear. The process of dimensionality reduction consists to find the functions $ F $ and $ G $ which are approximately functions inverse to each other. Since the inverse of a nonlinear function can not be linear, therefore, if any of the functions is linear, the other must also be linear.
+
+Linear self-supervised MLP can be extended to implement a non-linear PCA, using non-linear activation functions and more hidden layers (see Figure \ref{fig:fig_2}).
+
      	
 \subsubsection{Fractal Theory } % jose luis
  
@@ -231,25 +264,11 @@ A fractal is characterized by the self-similarity property, i.e., it is an objec
      where, $K_p$ is a proportionality constant, and $\mathfrak{D}$ is the correlation fractal dimension of the dataset.
     Consequently, a fractal is defined by the self-similarity property, that is the main characteristic that represents exactly or statistically  the similarity between the parts to the whole fractal.
  
+\subsubsection{ Fractal Dimension and Dimensionality Reduction} % jose luis
+ 
 
+The approaches used to reduce dimensionality depend on some parametric and non-parametric methods. Other methods reduce the original feature space by heuristic deletion of some of the attributes.
 
-\subsection{Similarity Measures} %cArlos
-% describir la distancia ecuclideana, manhattan, minkowski
-
-The most common similarity measures used are Euclidean, Manhattan, and Minkowski distance. Given two vectors $i = (x_{i1}, x_{i2}, x_{i3}, ..., x_{ip})$ and $j = (x_{j1}, x_{j2}, x_{j3}, ..., x_{jp})$, the Euclidean distance is defined as:
-\begin{equation}
-d(i,j) = \sqrt{(x_{i1}-x_{j1})^2+(x_{i2}-x_{j2})^2+...+(x_{ip}-x_{jp})^2}
-\end{equation}
-On the other hand, the Manhattan (or city block) distance is defined as:
-\begin{equation}
-d(i,j) = \left |x_{i1}-x_{j1}\right |+\left |x_{i2}-x_{j2}\right |+...+\left |x_{ip}-x_{jp}\right | 
-\end{equation}
-The Minkowski distance is a generalization of the Euclidean and Manhattan distances, and it is defined as:
-\begin{equation}
-d(i,j) = \sqrt[h]{\left |x_{i1}-x_{j1}\right |^h+\left |x_{i2}-x_{j2}\right |^h+...+\left |x_{ip}-x_{jp}\right | ^h }
-\end{equation}
-
-The Euclidean and the Manhattan distance satisfy some mathematical properties: Non-negativity, Identity of indiscernibles, Symmetry:, Triangle inequality \cite{han2011data}.
 
 \subsection{Retrieval Performance} % supervised hashing %% theoria 
 
@@ -270,40 +289,59 @@ SSH consists in index a dataset of $N$ images $\mathcal{I}_{train}$, of which a 
 %Given a query $q$, we first define $\delta (q, i)=1$ if the $i^{th}$ image is correct for $q$, and $0$ otherwise. The precision at (rank) $k$ is given by $P(q,k) = \tfrac{1}{k} {\sum}_{i=1}^{k} \delta (q, i)$. Denoting by $cl(q) = {\sum}_{i=1}^{N} \delta (q, i)$ the total number of correct images in $\mathcal{I}_{train}$, the average precision at $k$ is $AP(q, k) = \tfrac{1}{cl(q)}{\sum}_{i=1}^{k}\delta (q, i) P(q,i)$. The mAP at $k$ (or simply mAP when $k = N$) is the mean AP over all test queries.
 Then, given a query $q$, if the $i^{th}$ image is correct for $q$ we define $\delta (q, i)=1$ , and $0$ otherwise. The precision at (rank) $k$ is given by $P(q,k) = \tfrac{1}{k} {\sum}_{i=1}^{k} \delta (q, i)$. Denoting by $cl(q) = {\sum}_{i=1}^{N} \delta (q, i)$ the total number of correct images in $\mathcal{I}_{train}$, and the average precision at $k$ is $AP(q, k) = \tfrac{1}{cl(q)}{\sum}_{i=1}^{k}\delta (q, i) P(q,i)$. The mAP at $k$ (or simply mAP when $k = N$) is the mean AP over all test queries.
 
-%\subsubsection*{Retrieval through class probability estimation}
+\subsubsection*{Retrieval through class probability estimation}
 
 %The information retrieval \cite{doi:10.1108/eb026647} and learning to rank that the optimal prediction for precision at $k$ is given by ranking items $x \in \mathcal{I}_{train}$ n according to their probability of being correct for the query. This result extends to the optimization of $mAP$.
 
-%The information recovery \cite{doi:10.1108/eb026647} and learning to rank that the best prediction for precision at $k$ is given by placing items $x \in \mathcal{I}_{train}$  $n$ according to the chance of being correct for the query. This result presents to the optimization of $mAP$.
+The information recovery \cite{doi:10.1108/eb026647} and learning to rank that the best prediction for precision at $k$ is given by placing items $x \in \mathcal{I}_{train}$  $n$ according to the chance of being correct for the query. This result presents to the optimization of $mAP$.
 \\
 %\textbf{Optimal ranking for SH.} In the specific setup of SH where the system knows the labels of the images in $\mathcal{I}_{train}$, the probability that an image $x$ with label $y$ is correct is the probability $\mathbb{P}(y\mid q)$ that the query image has label $y$. The important point here is that the probability of $x$ being correct for $q$ only depends on the label of $x$. Thus, ordering the $C$ labels so that $\mathbb{P}(y\mid q)\geq \dots \geq\mathbb{P}(c_C\mid q)$,the optimal ranking is to return all images of $\mathcal{I}_{train}n$ with label $c_1$ first, followed by all images with label $c_2$, and so on.
-%\textbf{Optimal ranking for SH.} In the particular setup of SH where the system knows the labels of the images in $\mathcal{I}_{train}$, the probability that a picture $x$ with label $y$ is correct is the likelihood $\mathbb{P}(y\mid q)$ that the query image has label $y$. The important point in this part is that the probability of $x$ being correct for $q$ only depends on the label of $x$. Thus, ordering the $C$ labels so that $\mathbb{P}(y\mid q)\geq \dots \geq\mathbb{P}(c_C\mid q)$, the best ranking is to return the complete dataset of $\mathcal{I}_{train}n$ with label $c_1$ first, followed by all the pictures with label $c_2$, and so on.
+\textbf{Optimal ranking for SH.} In the particular setup of SH where the system knows the labels of the images in $\mathcal{I}_{train}$, the probability that a picture $x$ with label $y$ is correct is the likelihood $\mathbb{P}(y\mid q)$ that the query image has label $y$. The important point in this part is that the probability of $x$ being correct for $q$ only depends on the label of $x$. Thus, ordering the $C$ labels so that $\mathbb{P}(y\mid q)\geq \dots \geq\mathbb{P}(c_C\mid q)$, the best ranking is to return the complete dataset of $\mathcal{I}_{train}n$ with label $c_1$ first, followed by all the pictures with label $c_2$, and so on.
 \\
-%\begin{comment}
-%In practice, $\mathbb{P}(.\mid q)$ is unknown, but we can train a classifier on $\mathcal{I}_{label} = \mathcal{I}_{train}$ which outputs probability estimates $\hat{\mathbb{P}}(c\mid q)$ for every label $c$, and compute the optimal ranking according to $\hat{\mathbb{P}}(c\mid q)$ Such probability estimates are given by, e.g., multiclass logistic regression or a Convolutional Neural Network (CNN) with a softmax output layer. Labels of $ \mathcal{I}_{train}$ are stored on [$log2 (C)$] e bits or in an inverted file.
-%\end{comment}
+\begin{comment}
+In practice, $\mathbb{P}(.\mid q)$ is unknown, but we can train a classifier
+on $\mathcal{I}_{label} = \mathcal{I}_{train}$ which outputs probability estimates $\hat{\mathbb{P}}(c\mid q)$ for every label $c$, and compute the optimal ranking according to $\hat{\mathbb{P}}(c\mid q)$ Such probability estimates are given by,
+e.g., multiclass logistic regression or a Convolutional Neural
+Network (CNN) with a softmax output layer. Labels of $ \mathcal{I}_{train}$
+are stored on [$log2 (C)$] e bits or in an inverted file.
+\end{comment}
 
-%In practice, $\mathbb{P}(.\mid q)$ is unfamiliar, but we can train a classifier on $\mathcal{I}_{label} = \mathcal{I}_{train}$ which outputs probability con predict $\hat{\mathbb{P}}(c\mid q)$ for every label $c$, and process the optimal ranking according to $\hat{\mathbb{P}}(c\mid q)$ Such probability estimates are shown by, e.g., multiclass logistic regression or a Convolutional Neural Network (CNN) with a softmax output layer. Labels of $ \mathcal{I}_{train}$ are stored on [$log2 (C)$] e bits or in an inverted file
+In practice, $\mathbb{P}(.\mid q)$ is unfamiliar, but we can train a classifier on $\mathcal{I}_{label} = \mathcal{I}_{train}$ which outputs probability con predict $\hat{\mathbb{P}}(c\mid q)$ for every label $c$, and process the optimal ranking according to $\hat{\mathbb{P}}(c\mid q)$ Such probability estimates are shown by, e.g., multiclass logistic regression or a Convolutional Neural Network (CNN) with a softmax output layer. Labels of $ \mathcal{I}_{train}$ are stored on [$log2 (C)$] e bits or in an inverted file
 
 \\
 %\textbf{Relationship between classification accuracy and ranking performance.} If we denote the classification accuracy as $p$, then the resulting mAP is at least $p$. When the classifier predicts the class of $q$ correctly, all images of that class will be ranked first and the resulting AP($q$) is $1$; this happens on a proportion $p$ of the queries. So, the classification accuracy is a lower bound on the mAP.
 
-%\textbf{Relationship between classification accuracy and ranking performance.} If we show the classification accuracy as $p$, so the resulting $mAP$ is at least $p$. When the classifier foretells the class of $q$ correctly, all images of this data set will be listed first, and the resulting AP($q$) is $1$; this occurs on a proportion $p$ of the queries. So, the classification accuracy is a lower bound on the mAP.
+\textbf{Relationship between classification accuracy and ranking performance.} If we show the classification accuracy as $p$, so the resulting $mAP$ is at least $p$. When the classifier foretells the class of $q$ correctly, all images of this data set will be listed first, and the resulting AP($q$) is $1$; this occurs on a proportion $p$ of the queries. So, the classification accuracy is a lower bound on the mAP.
 \\
 %\textbf{Optimal ranking for SSH.} In the more general setup of SSH, we do not know the label of some images in $\mathcal{I}_{train}$. Yet, considering the (true) conditional label probabilities $\mathbb{P}(c\mid q)$ and $\mathbb{P}(c\mid x)$, the probability that $x$ is correct for $q$ is given by $\sum_{c=1}^C \mathbb{P}(c\mid q) \mathbb{P}(c\mid x) $ it is the probability that both q and x have the same label, assuming conditional independence of the labels of the query and the image. Notice that this is the dot product between the conditional label probability vectors of $q$ and $x$.Then, given probability estimates $\hat{\mathbb{P}}$  for the labels of queries and images, which are obtained on $\mathcal{I}_{label}$, we consider two retrieval algorithms:
 
-%\textbf{Optimal ranking for SSH.} In the more general setup of SSH, we do not know the label of some images in $\mathcal{I}_{train}$. Yet, considering the (real) probabilities $\mathbb{P}(c\mid q)$ and $\mathbb{P}(c\mid x)$, the probability that $x$ is correct for $q$ is given by $\sum_{c=1}^C \mathbb{P}(c\mid q) \mathbb{P}(c\mid x) $ it is the probability that both q and $x$ have the same label, assuming conditional self-sufficiency of the labels of the query and the image. Notice that this is the dot product between the dependent label probability vectors of $q$ and $x$. Then, given probability measures $\hat{\mathbb{P}}$  for the labels of queries and images, which are taken on $\mathcal{I}_{label}$, we consider two retrieval algorithms:
+\textbf{Optimal ranking for SSH.} In the more general setup of SSH, we do not know the label of some images in $\mathcal{I}_{train}$. Yet, considering the (real) probabilities $\mathbb{P}(c\mid q)$ and $\mathbb{P}(c\mid x)$, the probability that $x$ is correct for $q$ is given by $\sum_{c=1}^C \mathbb{P}(c\mid q) \mathbb{P}(c\mid x) $ it is the probability that both q and $x$ have the same label, assuming conditional self-sufficiency of the labels of the query and the image. Notice that this is the dot product between the dependent label probability vectors of $q$ and $x$. Then, given probability measures $\hat{\mathbb{P}}$  for the labels of queries and images, which are taken on $\mathcal{I}_{label}$, we consider two retrieval algorithms:
 
 \\
-%\begin{itemize}
+\begin{itemize}
 %\item \textbf{Classifier topline: }: For each image $x$of $\mathcal{I}_{train}$, store a vector $u(x)$ equal to either (1) the one-hot encoding vector of the label of $x$ if $x \in \mathcal{I}_{label}$, or (2) the full conditional probability vector  $\hat{\mathbb{P}}(.\mid x)$). Rank images $x$ according to the dot product $\langle\hat{\mathbb{P}}(.\mid q), u(x)\rangle$  This strategy corresponds to the optimal strategy, but requires storing the probability vectors for images in $\mathcal{I}_{train} \backslash \mathcal{I}_{label}$
 
-%\item \textbf{Classifier topline: }: For each image $x$of $\mathcal{I}_{train}$, saves a vector $u(x)$ either way \cite{norouzi2012hamming} the one-hot encoding vector of the label of $x$ if $x \in \mathcal{I}_{label}$, or \cite{wang2013learning} the full vector  $\hat{\mathbb{P}}(.\mid x)$). Rank images $x$ according to the dot product $\langle\hat{\mathbb{P}}(.\mid q), u(x)\rangle$  This strategy corresponds to the best strategy, but needs to save the probability vectors for each image in $\mathcal{I}_{train} \backslash \mathcal{I}_{label}$
+\item \textbf{Classifier topline: }: For each image $x$of $\mathcal{I}_{train}$, saves a vector $u(x)$ either way \cite{norouzi2012hamming} the one-hot encoding vector of the label of $x$ if $x \in \mathcal{I}_{label}$, or \cite{wang2013learning} the full vector  $\hat{\mathbb{P}}(.\mid x)$). Rank images $x$ according to the dot product $\langle\hat{\mathbb{P}}(.\mid q), u(x)\rangle$  This strategy corresponds to the best strategy, but needs to save the probability vectors for each image in $\mathcal{I}_{train} \backslash \mathcal{I}_{label}$
 
 %\item \textbf{Classifier hashed: } Here we hash the conditional probability vector. The first hashing method that we evaluate, is the one-hot strategy, which stores the index of the maximal activation on $\left \lceil log_2(C) \right \rceil$ bits. This approach, denoted \textbf{Classifier+one-hot} in what follows, returns all images of the strongest class first. The second encoding, referred to as Classifier+LSH, is locality-sensitive hashing (LSH) with tight frames \cite{jegou2012anti}, a simple non data adaptive hashing scheme. This LSH method produces binary vectors that are compared with Hamming distances. Therefore it can be used as drop-in replacements for the competing binary encoding methods.
 
-%\item \textbf{Classifier hashed: } Here we hash the probability vector. The first hashing method that we evaluate is the one-hot strategy, which saves the index of the maximal activation on $\left \lceil log_2(C) \right \rceil$ bits. This approach expressed \textbf{Classifier+one-hot} in what results, returns all images of the strongest class first. The second encoding, referred to as Classifier+LSH, is locality-sensitive hashing (LSH) with tight frames \cite{jegou2012anti}, a simple non-data adaptive hashing scheme. This LSH method provides binary vectors that are compared with Hamming distances. Consequently, it can be used as drop-in replacements for the competing binary encoding methods.
-%\end{itemize}
+\item \textbf{Classifier hashed: } Here we hash the probability vector. The first hashing method that we evaluate is the one-hot strategy, which saves the index of the maximal activation on $\left \lceil log_2(C) \right \rceil$ bits. This approach expressed \textbf{Classifier+one-hot} in what results, returns all images of the strongest class first. The second encoding, referred to as Classifier+LSH, is locality-sensitive hashing (LSH) with tight frames \cite{jegou2012anti}, a simple non-data adaptive hashing scheme. This LSH method provides binary vectors that are compared with Hamming distances. Consequently, it can be used as drop-in replacements for the competing binary encoding methods.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    
 \section{Comparison of Data Representations} % Ricardo
    
@@ -322,34 +360,48 @@ Then, given a query $q$, if the $i^{th}$ image is correct for $q$ we define $\de
 
 \subsection{Accuracy of Similarity} % Oscar
 
+In this section, we are going to do a review of the methodolody of our evaluation, as well as the parameters that we use for each similarity measuares, then presents the results and the discuss of what we find.
 
-Now we are going to do a review of the methodolody of our evaluation, as well as the parameters that we use for each similarity measuares, then presents the results and the discuss of what we find.
+\subsubsection{Accuracy Evaluation Framework}
+
       
-The idea is to work with the nearest neighbor (1NN) classifier on each dataset to evaluate the efficacy of the distance measure.
+The idea is to work with a nearest neighbor (1NN) classifier [17, 32] on labeled data to evaluate the efficacy of the distance measure. Specifically, each time series has a correct class label, and the classifier tries to predict the label of its nearest neighbor in the training set.  
 
-So, we compared the different variances of $L_p$ -norms, we found that the Euclidean and the Minkowski distance have a very close performance, and both outperforms the Manhattan distance (Table \ref{accuracy-similatities}). 
+To evaluate each similarity measure, we have to use a cross-validation algorithm ( ), based on [37]. Using a layered divided randomly the input data set into $k$ subsets for the organization based on subsequences to reduce the impact of skewed class distribution. 
 
-\begin{table}[!h]
-\centering
-\caption{Analysis of Classification Accuracy}
-\label{accuracy-similatities}
-\begin{tabular}{|l|c|c|c|}
-\hline
-\textbf{}        & \textbf{MANHATTAN} & \textbf{ECUCLIDEAN} & \textbf{MINKOWSKI} \\ \hline
-\textbf{MNIST}   & 0.9794             & \textbf{0.9811}     & \textbf{0.9811}    \\ \hline
-\textbf{CIFAR10} & 0.9009             & \textbf{0.9013}     & \textbf{0.9013}    \\ \hline
-\textbf{SVHN}    & 0.8705             & \textbf{0.8729}     & \textbf{0.8729}    \\ \hline
-\textbf{AGNEWS}  & 0.8750             & \textbf{0.8752}     & \textbf{0.8752}    \\ \hline
-\end{tabular}
-\end{table}
+This algorithm requires that we provide an input k for the number of cross-validations.  Each data set tries to strike a balance between the following factors:  1. The training set size should be selected to enable discriminatively, i.e., 2. a number of items in the training set should be sufficient to represent each class, and 3. The number of cross-validations should be between 5− 20 to minimize bias and variation[28]. 
+
+The actual number of splits is empirically selected such that the training error for 1NN Euclidean distance (which we use as a comparison reference) However, most of the time only empirical values are given for each parameter in isolation. 
+
+In our experiments we consider both the version of distance measures without warping and with warping.  We fix the matching reward weight to 50 and search for the optimal penalty weight from 0 to 50, as suggested by the authors.
+
+
+
+
+
+
+
+\subsubsection{Analysis of Classification Accuracy}
+To provide a general evaluation, we described the performs presented in \cite{ding2008querying}, they experiment on time series data sets. First, they compared the different variances of $L_p$ -norms, they found that the Euclidean distance and the Manhattan distance have a very close performance, and both largely outperforms the $L_{\infty}$ -norm. Due to the $L_{\infty}$ -norm uses the maximum distance between two sets of time series points, it is more sensitive to noise.
+
+In \cite{ding2008querying} the authors have found that full DTW is superior over Euclidean. And the effectiveness of constrained DTW is the same than that of full DTW. So, to decrease the time to get the distance and to use proposed lower bounding techniques, it could generally use the constrained DTW instead of DTW. 
+
+On the other hand, the accuracy of DISSIM is slightly better than Euclidean distance. On most of the data sets, TQuEST is worse than Euclidean and DTW distances. The performance of LCSS, EDR and ERP outperform Euclidean distance by a large percentage. Only EDR is potentially slightly better than full DTW, while the performance of LCSS and ERP are very close to DTW. It has observed that the constrained version of LCSS is even slightly better the unconstrained one, while it also reduces the computation cost and gives increase to an efficient lower-bounding measure.
+
+The authors in \cite{ding2008querying} observed that the accuracy of SpADe is close to that of Euclidean but is inferior to DTW distance, although on some data sets SpADe outperforms the other two. In summary, they found through experiments that there is no clear evidence that there exists one similarity measure that is superior to others in the literature, regarding accuracy. 
+
+
 
 \section{Comparison of Retrieval Performance} % Jose Luis
    
-%LSH, Lsh-forest, ITQ, LOPQ. (MNIST, CIFAR 10, SVHN, AG-NEWS)                 	Accuracy  [Recall]( Result [exact-kNNQ vs ann-kNNQ]), Precision & Recall, mAP [].
+\subsection{Evaluation Protocol: Retrieval with hash codes}
+LSH, Lsh-forest, ITQ, LOPQ. (MNIST, CIFAR 10, SVHN, AG-NEWS)     
+            	Accuracy  [Recall]( Result [exact-kNNQ vs ann-kNNQ]), Precision & Recall, mAP [].
  
 
   
-\subsection{Evaluation Protocol: Retrieval with hash codes}
+%\subsection{Evaluation Protocol: Retrieval with hash codes}
+ 
 
 In this section, we describe the two evaluation tasks proposed in \cite{sablayrolles2016should}, namely retrieval of unseen classes, and transfer learning to new classes. They correspond to application cases on large datasets. The two protocols differ only in the evaluation metric: ranking versus class accuracy.
 
@@ -362,19 +414,16 @@ In this section, we describe the two evaluation tasks proposed in \cite{sablayro
   % LSH, Lsh-forest, ITQ, LOPQ. (MNIST, CIFAR 10, SVHN, AG-NEWS)     
    %         	Accuracy  [Recall]( Result [exact-kNNQ vs ann-kNNQ]), Precision & Recall, mAP [].
             	
-            	
-Performance was measured in well-known approximate search methods, namely  Multi-probe LSH \cite{multiprobe}, LSH-Forest \cite{lshforest}, ITQ \cite{itq}, and LOPQ \cite{lopq}. All of the experiments were performed on a workstation with Intel core i7  3.0Ghz (12 cores) CPU and 64Gb RAM which is supplied with four Geforce GTX 1080 GPU with 8Gb VRAM each one.
-            	
-            	
-\begin{table*}[ht]
-\caption{Mean Average Precision(mAP), precision and recall, and accuracy for different methods on the MNIST and  SVHN  datasets. }
+ 
+ \begin{table*}[ht]
+\caption{Experimentos con data normalizada MNIST, SVHN . }
 \label{table:map}
 \centering
 \begin{footnotesize}
 \begin{tabular}{l|c|c|c|c|c|c|c|c|}
 \cline{2-9}
-    & \multicolumn{4}{c|}{\textbf{MNIST}}             & \multicolumn{4}{c|}{\textbf{SVHN}}         \\ \cline{2-9} 
-    & \textbf{mAP} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy} & \textbf{mAP} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy}  \\ \hline
+                                           & \multicolumn{4}{c|}{\textbf{MNIST}}             & \multicolumn{4}{c|}{\textbf{SVHN}}         \\ \cline{2-9} 
+                                           & \textbf{mAP} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy} & \textbf{mAP} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy}  \\ \hline
 \multicolumn{1}{|l|}{\textbf{BF Blass  \cite{multiprobe}}}       & 0.32         & 0.10            & 0.99    & 1.0      & 0.33         & 0.11            & 0.99  & 1.0     \\ \hline
 \multicolumn{1}{|l|}{\textbf{MpLSH \cite{itq}}}         &  0.006         & 0.0007            & 0.006    & 0.0007   & 0.071        & 0.0098            & 0.093   & 0.027    \\ \hline
 \multicolumn{1}{|l|}{\textbf{ITQ \cite{lopq}}}        & 0.27         & 0.081            & 0.81    & 0.74    & 0.31         & 0.106            & 0.92   & 0.915      \\ \hline
@@ -386,14 +435,14 @@ Performance was measured in well-known approximate search methods, namely  Multi
 
             	
 \begin{table*}[ht]
-\caption{Mean Average Precision(mAP), precision and recall, and accuracy for different methods on the CIFAR-10 and  AGNEWS  datasets. }
-\label{table:map2}
+\caption{Experimentos con data normalizada CIFAR-10 y AGNEWS. }
+\label{table:map}
 \centering
 \begin{footnotesize}
 \begin{tabular}{l|c|c|c|c|c|c|c|c|}
 \cline{2-9}
-     & \multicolumn{4}{c|}{\textbf{CIFAR-10}}            & \multicolumn{4}{c|}{\textbf{AGNEWS}} \\ \cline{2-9} 
-     & \textbf{mAP} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy} & \textbf{mAP} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy}\\ \hline
+                                           & \multicolumn{4}{c|}{\textbf{CIFAR-10}}            & \multicolumn{4}{c|}{\textbf{AGNEWS}} \\ \cline{2-9} 
+                                           & \textbf{mAP} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy} & \textbf{mAP} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy}\\ \hline
 \multicolumn{1}{|l|}{\textbf{BF Blass  \cite{multiprobe}}}       & 0.23        & 0.099  & 0.099 & 1.0    & 0.0         & 0.0            & 0.0    & 0.0\\ \hline
 \multicolumn{1}{|l|}{\textbf{MpLSH \cite{itq}}}         & 0.003         & 0.0003    & 0.003        & 0.0004      & 0.0         & 0.0            & 0.0    & 0.0  \\ \hline
 \multicolumn{1}{|l|}{\textbf{ITQ \cite{lopq}}}        & 0.22         & 0.098            & 0.98  & 0.98      & 0.0         & 0.0            & 0.0    & 0.0\\ \hline
@@ -401,7 +450,9 @@ Performance was measured in well-known approximate search methods, namely  Multi
 \end{tabular}
 \end{footnotesize}
 \end{table*}
-            	
+
+
+
 \section{Conclusion \& Future Work}
  
 
