@@ -351,7 +351,19 @@ So, we compared the different variances of $L_p$ -norms, we found that the Eucli
   
 \subsection{Evaluation Protocol: Retrieval with hash codes}
 
-In this section, we describe the two evaluation tasks proposed in \cite{sablayrolles2016should}, namely retrieval of unseen classes, and transfer learning to new classes. They correspond to application cases on large datasets. The two protocols differ only in the evaluation metric: ranking versus class accuracy.
+In this section, we describe the two evaluation tasks proposed in \cite{sablayrolles2016should}, namely retrieval of unseen classes, and transfer learning to new classes. They correspond to application cases on large datasets. 
+
+
+
+
+
+
+
+
+
+
+
+The two protocols differ only in the evaluation metric: ranking versus class accuracy.
 
 \textbf{Dataset definition.} at test time we use separate classes from a standard classification dataset. When learning the hashing function $75\%$ of the classes are assumed to be known, and the $25\%$ remaining classes are used to evaluate the encoding/hashing scheme. We call train75/test75 the train/test images of the $75\%$ classes and train25/test25 the remaining ones.
 
@@ -376,8 +388,8 @@ Performance was measured in well-known approximate search methods, namely  Multi
     & \multicolumn{4}{c|}{\textbf{MNIST}}             & \multicolumn{4}{c|}{\textbf{SVHN}}         \\ \cline{2-9} 
     & \textbf{mAP} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy} & \textbf{mAP} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy}  \\ \hline
 \multicolumn{1}{|l|}{\textbf{BF Blass  \cite{multiprobe}}}       & 0.32         & 0.10            & 0.99    & 1.0      & 0.33         & 0.11            & 0.99  & 1.0     \\ \hline
-\multicolumn{1}{|l|}{\textbf{MpLSH \cite{itq}}}         &  0.006         & 0.0007            & 0.006    & 0.0007   & 0.071        & 0.0098            & 0.093   & 0.027    \\ \hline
-\multicolumn{1}{|l|}{\textbf{ITQ \cite{lopq}}}        & 0.27         & 0.081            & 0.81    & 0.74    & 0.31         & 0.106            & 0.92   & 0.915      \\ \hline
+\multicolumn{1}{|l|}{\textbf{MpLSH \cite{multiprobe}}}         &  0.006         & 0.0007            & 0.006    & 0.0007   & 0.071        & 0.0098            & 0.093   & 0.027    \\ \hline
+\multicolumn{1}{|l|}{\textbf{ITQ \cite{itq}}}        & 0.27         & 0.081            & 0.81    & 0.74    & 0.31         & 0.106            & 0.92   & 0.915      \\ \hline
 \multicolumn{1}{|l|}{\textbf{LSH-F \cite{lshforest}}}       &  0.33         & 0.10            & 0.99 & 0.99       & 0.34         & 0.11            & 0.99    & 0.99    \\ \hline
 \end{tabular}
 \end{footnotesize}
@@ -395,8 +407,8 @@ Performance was measured in well-known approximate search methods, namely  Multi
      & \multicolumn{4}{c|}{\textbf{CIFAR-10}}            & \multicolumn{4}{c|}{\textbf{AGNEWS}} \\ \cline{2-9} 
      & \textbf{mAP} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy} & \textbf{mAP} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy}\\ \hline
 \multicolumn{1}{|l|}{\textbf{BF Blass  \cite{multiprobe}}}       & 0.23        & 0.099  & 0.099 & 1.0    & 0.0         & 0.0            & 0.0    & 0.0\\ \hline
-\multicolumn{1}{|l|}{\textbf{MpLSH \cite{itq}}}         & 0.003         & 0.0003    & 0.003        & 0.0004      & 0.0         & 0.0            & 0.0    & 0.0  \\ \hline
-\multicolumn{1}{|l|}{\textbf{ITQ \cite{lopq}}}        & 0.22         & 0.098            & 0.98  & 0.98      & 0.0         & 0.0            & 0.0    & 0.0\\ \hline
+\multicolumn{1}{|l|}{\textbf{MpLSH \cite{multiprobe}}}         & 0.003         & 0.0003    & 0.003        & 0.0004      & 0.0         & 0.0            & 0.0    & 0.0  \\ \hline
+\multicolumn{1}{|l|}{\textbf{ITQ \cite{itq}}}        & 0.22         & 0.098            & 0.98  & 0.98      & 0.0         & 0.0            & 0.0    & 0.0\\ \hline
 \multicolumn{1}{|l|}{\textbf{LSH-F \cite{lshforest}}}       & 0.23         & 0.099            & 0.99  &  0.99    & 0.0         & 0.0            & 0.0 & 0.0  \\ \hline
 \end{tabular}
 \end{footnotesize}
